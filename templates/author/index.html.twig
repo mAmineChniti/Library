@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Author's Page{% endblock %}
+
+{% block body %}
+<div class="author-list-container">
+    {% if authors is empty %}
+        <p>No authors found</p>
+    {% else %}
+        <table class="author-table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Actions</th>  {# Added new column for actions #}
+                </tr>
+            </thead>
+            <tbody>
+                {% for author in authors %}
+                    <tr>
+                        <td>{{ author.username }}</td>
+                        <td>{{ author.email }}</td>
+                        <td>
+                            {#<a href="{{ path('app_author_edit', {id: author.id}) }}" class="edit-link">Edit</a> | #}
+                            <a href="{{ path('app_author_delete', {id: author.id}) }}" class="delete-link" onclick="return confirm('Are you sure you want to delete this author?');">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <a href="{{ path('app_author_add') }}" class="add-link">Add Author</a>
+                    </td>
+                </tr>
+        </table>
+    {% endif %}
+</div>
+{% endblock %}
