@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Books Sorted by Authors</h1>
+
+    {# Check if there are any books to display #}
+    {% if books is not empty %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Book Title</th>
+                    <th>Author Name</th>
+                    <th>Publication Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {# Loop through each book and display its details #}
+                {% for book in books %}
+                    <tr>
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.authorID.username }}</td> {# Adjust based on the actual property name in Author entity #}
+                        <td>{{ book.publicationDate|date('Y-m-d') }}</td> {# Format the publication date #}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No books found.</p> {# Message when no books are available #}
+    {% endif %}
+{% endblock %}
+

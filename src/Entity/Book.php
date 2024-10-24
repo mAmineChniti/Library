@@ -23,6 +23,9 @@ class Book
     #[ORM\Column]
     private ?int $enabled = null;
 
+    #[ORM\ManyToOne(inversedBy: 'books')]
+    private ?Author $authorID = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -67,6 +70,18 @@ class Book
     public function setEnabled(int $enabled): static
     {
         $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    public function getAuthorID(): ?Author
+    {
+        return $this->authorID;
+    }
+
+    public function setAuthorID(?Author $authorID): static
+    {
+        $this->authorID = $authorID;
 
         return $this;
     }
